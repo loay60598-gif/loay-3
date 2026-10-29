@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOUAI ACADEMY - المنصة التعليمية الجزائرية الشاملة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e',
+                            600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d'
+                        }
+                    },
+                    fontFamily: { sans: ['Tajawal', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Tajawal', sans-serif; } </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="navigateToHome()">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black bg-gradient-to-l from-brand-700 to-emerald-600 bg-clip-text text-transparent">LOUAI ACADEMY</span>
+                        <span class="block text-xs font-semibold text-slate-400">أولى ثانوي علوم وتكنولوجيا</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <button onclick="openAdminModal()" class="px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white rounded-xl text-xs font-bold transition flex items-center shadow-md">
+                        <i class="fa-solid fa-user-shield ml-2 text-amber-400"></i> <span id="admin-btn-label">لوحة التحكم</span>
+                    </button>
+                    <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Home View -->
+        <div id="home-view" class="space-y-8">
+            <section class="p-8 rounded-3xl bg-gradient-to-r from-brand-800 via-brand-700 to-slate-900 text-white shadow-xl text-center space-y-4">
+                <h1 class="text-3xl md:text-4xl font-black">السنة الأولى ثانوي - جذع مشترك علوم وتكنولوجيا</h1>
+                <p class="text-slate-200 text-sm">تم ربط قاعدة البيانات بملف Excel المعتمد للفروض والاختبارات بنجاح!</p>
+            </section>
+
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border shadow-sm space-y-4">
+                <h3 class="text-xl font-bold">اختر المادة الدراسية:</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="subjects-grid">
+                    <button onclick="openSubjectDetails('الرياضيات')" class="p-6 rounded-2xl border border-brand-500 bg-brand-50/50 dark:bg-brand-900/20 hover:border-brand-600 transition text-right shadow-sm">
+                        <h4 class="font-bold text-brand-700 dark:text-brand-300"><i class="fa-solid fa-calculator ml-1"></i> الرياضيات (مكتملة)</h4>
+                    </button>
+                    <button onclick="openSubjectDetails('علوم الطبيعة والحياة')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">علوم الطبيعة والحياة</h4></button>
+                    <button onclick="openSubjectDetails('العلوم الفيزيائية')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">العلوم الفيزيائية</h4></button>
+                    <button onclick="openSubjectDetails('الإعلام الآلي')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">الإعلام الآلي</h4></button>
+                    <button onclick="openSubjectDetails('اللغة العربية وآدابها')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">اللغة العربية وآدابها</h4></button>
+                    <button onclick="openSubjectDetails('اللغة الفرنسية')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">اللغة الفرنسية</h4></button>
+                    <button onclick="openSubjectDetails('اللغة الإنجليزية')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">اللغة الإنجليزية</h4></button>
+                    <button onclick="openSubjectDetails('التاريخ والجغرافيا')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">التاريخ والجغرافيا</h4></button>
+                    <button onclick="openSubjectDetails('العلوم الإسلامية')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">العلوم الإسلامية</h4></button>
+                    <button onclick="openSubjectDetails('التكنولوجيا')" class="p-6 rounded-2xl border hover:border-brand-500 transition text-right shadow-sm"><h4 class="font-bold">التكنولوجيا</h4></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail View -->
+        <div id="detail-view" class="hidden space-y-8">
+            <button onclick="navigateToHome()" class="text-xs font-bold text-brand-600 flex items-center"><i class="fa-solid fa-arrow-right ml-1"></i> العودة للمواد</button>
+            
+            <div class="bg-gradient-to-r from-brand-700 to-slate-800 text-white p-8 rounded-3xl shadow-lg">
+                <h2 id="detail-subject-title" class="text-3xl font-black"></h2>
+                <p class="text-slate-200 text-sm mt-1">البرنامج الشامل للدروس، الفروض (1 إلى 5)، والاختبارات (1 إلى 5) للفصول الثلاثة.</p>
+            </div>
+
+            <div class="flex border-b space-x-4 space-x-reverse">
+                <button onclick="switchTrimester(1)" id="tab-trim-1" class="px-6 py-3 font-bold border-b-2 border-brand-500 text-brand-600 text-sm">الفصل الأول</button>
+                <button onclick="switchTrimester(2)" id="tab-trim-2" class="px-6 py-3 font-bold text-slate-400 text-sm">الفصل الثاني</button>
+                <button onclick="switchTrimester(3)" id="tab-trim-3" class="px-6 py-3 font-bold text-slate-400 text-sm">الفصل الثالث</button>
+            </div>
+
+            <div class="space-y-10">
+                <section class="space-y-4">
+                    <h3 class="text-xl font-bold flex items-center"><i class="fa-solid fa-bookmark text-brand-500 ml-2"></i> الدروس والملخصات</h3>
+                    <div id="lessons-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </section>
+                <section class="space-y-4">
+                    <h3 class="text-xl font-bold flex items-center"><i class="fa-solid fa-file-lines text-blue-500 ml-2"></i> نماذج الفروض (من Excel)</h3>
+                    <div id="tests-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                </section>
+                <section class="space-y-4">
+                    <h3 class="text-xl font-bold flex items-center"><i class="fa-solid fa-graduation-cap text-purple-500 ml-2"></i> نماذج الاختبارات (من Excel)</h3>
+                    <div id="exams-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Viewer: العرض الداخلي المميز لتصفح الملف دون الخروج من الموقع -->
+    <div id="doc-viewer-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-5xl w-full h-[90vh] p-4 flex flex-col shadow-2xl space-y-3">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="viewer-modal-title" class="text-sm font-bold text-slate-800 dark:text-white flex items-center">
+                    <i class="fa-solid fa-book-open text-brand-500 ml-2"></i> <span>عرض الموضوع</span>
+                </h3>
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <a id="viewer-external-link" href="#" target="_blank" class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-xs font-bold rounded-lg hover:bg-slate-200">فتح في نافذة خارجية <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i></a>
+                    <button onclick="closeDocViewer()" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="flex-grow w-full bg-slate-100 dark:bg-slate-900 rounded-2xl overflow-hidden relative">
+                <iframe id="viewer-iframe" src="" class="w-full h-full border-0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-lg font-bold">لوحة التحكم</h3>
+                <button onclick="closeAdminModal()" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <button onclick="resetToExcelData()" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-xs shadow-md">
+                <i class="fa-solid fa-sync ml-1"></i> تحديث قاعدة البيانات من Excel
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentSubject = '';
+        let currentTrimester = 1;
+
+        // استخراج البيانات المباشرة المستخرجة من ملف Excel الخاص بك
+        const excelSt1Data = {
+            "الرياضيات": {
+                "1": {
+                    lessons: [
+                        { id: 10, title: "دروس الأعداد والحساب (المجموعات الأساسية)", url: "#" },
+                        { id: 11, title: "الترتيب، القيم المطلقة، والمجالات", url: "#" },
+                        { id: 12, title: "عمومات على الدوال العددية", url: "#" }
+                    ],
+                    tests: [
+                        { id: 100, title: "فرض 1_1", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-77/" },
+                        { id: 101, title: "فرض 1_2", url: "https://eddirasa.com/ens-sec/1as/maths/tests-term-1/" },
+                        { id: 102, title: "فرض 1_3", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-72/" },
+                        { id: 103, title: "فرض 1_4", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-71/" },
+                        { id: 104, title: "فرض 1_5", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-68/" }
+                    ],
+                    exams: [
+                        { id: 105, title: "اختبار 1_1", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-18/" },
+                        { id: 106, title: "اختبار 1_2", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-17/" },
+                        { id: 107, title: "اختبار 1_3", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-15/" },
+                        { id: 108, title: "اختبار 1_4", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-6/" },
+                        { id: 109, title: "اختبار 1_5", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-5/" }
+                    ]
+                },
+                "2": {
+                    lessons: [
+                        { id: 13, title: "الدوال المرجعية (مقلوبة، مربع، جذر تربيعي)", url: "#" },
+                        { id: 14, title: "المعادلات والمتراجحات ذات مجهول واحد", url: "#" },
+                        { id: 15, title: "الإحصاء ووصف البيانات", url: "#" }
+                    ],
+                    tests: [
+                        { id: 110, title: "فرض 2_1", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-3/" },
+                        { id: 111, title: "فرض 2_2", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-377/" },
+                        { id: 112, title: "فرض 2_3", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-201/" },
+                        { id: 113, title: "فرض 2_4", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-198/" },
+                        { id: 114, title: "فرض 2_5", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-191/" }
+                    ],
+                    exams: [
+                        { id: 115, title: "اختبار 2_1", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-6/" },
+                        { id: 116, title: "اختبار 2_2", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-5/" },
+                        { id: 117, title: "اختبار 2_3", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-823/" },
+                        { id: 118, title: "اختبار 2_4", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-816/" },
+                        { id: 119, title: "اختبار 2_5", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-373/" }
+                    ]
+                },
+                "3": {
+                    lessons: [
+                        { id: 16, title: "الهندسة في المستوي والمعالم", url: "#" },
+                        { id: 17, title: "الحساب الشعاعي وإحداثيات نقطة", url: "#" },
+                        { id: 18, title: "المستقيمات والجداء السلمي", url: "#" }
+                    ],
+                    tests: [
+                        { id: 120, title: "فرض 3_1", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-7/" },
+                        { id: 121, title: "فرض 3_2", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9-3/" },
+                        { id: 122, title: "فرض 3_3", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-%D9%85-%D8%B9/" },
+                        { id: 123, title: "فرض 3_4", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-101/" },
+                        { id: 124, title: "فرض 3_5", url: "https://eddirasa.com/%D9%81%D8%B1%D8%B6-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7-100/" }
+                    ],
+                    exams: [
+                        { id: 125, title: "اختبار 3_1", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-6/" },
+                        { id: 126, title: "اختبار 3_2", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89-%D8%AB%D8%A7%D9%86%D9%88%D9%8A-%D8%AC-5/" },
+                        { id: 127, title: "اختبار 3_3", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-823/" },
+                        { id: 128, title: "اختبار 3_4", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-816/" },
+                        { id: 129, title: "اختبار 3_5", url: "https://eddirasa.com/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%B3-373/" }
+                    ]
+                }
+            }
+        };
+
+        // حفظ البيانات في التخزين المحلي
+        if (!localStorage.getItem('louai_excel_st1_data')) {
+            localStorage.setItem('louai_excel_st1_data', JSON.stringify(excelSt1Data));
+        }
+        let academyData = JSON.parse(localStorage.getItem('louai_excel_st1_data'));
+
+        // دالة العرض الداخلي المميزة داخل الصفحة
+        function openInAppViewer(title, url) {
+            if(!url || url === '#') {
+                alert("سيتم إضافة هذا الدرس قريباً!");
+                return;
+            }
+            document.getElementById('viewer-modal-title').innerText = title;
+            document.getElementById('viewer-external-link').href = url;
+            document.getElementById('viewer-iframe').src = url;
+
+            const modal = document.getElementById('doc-viewer-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDocViewer() {
+            document.getElementById('viewer-iframe').src = '';
+            const modal = document.getElementById('doc-viewer-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function navigateToHome() {
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('detail-view').classList.add('hidden');
+        }
+
+        function openSubjectDetails(subject) {
+            currentSubject = subject;
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('detail-view').classList.remove('hidden');
+            document.getElementById('detail-subject-title').innerText = `مادة ${subject}`;
+            switchTrimester(1);
+        }
+
+        function switchTrimester(trim) {
+            currentTrimester = trim;
+            [1, 2, 3].forEach(t => {
+                const btn = document.getElementById(`tab-trim-${t}`);
+                btn.className = (t === trim) ? "px-6 py-3 font-bold border-b-2 border-brand-500 text-brand-600 text-sm" : "px-6 py-3 font-bold text-slate-400 text-sm";
+            });
+            renderContent(trim);
+        }
+
+        function renderContent(trim) {
+            const lessonsList = document.getElementById('lessons-list');
+            const testsGrid = document.getElementById('tests-grid');
+            const examsGrid = document.getElementById('exams-grid');
+            lessonsList.innerHTML = ''; testsGrid.innerHTML = ''; examsGrid.innerHTML = '';
+
+            const subData = academyData[currentSubject]?.[trim];
+            if(subData) {
+                if(subData.lessons && subData.lessons.length > 0) {
+                    subData.lessons.forEach(l => {
+                        lessonsList.innerHTML += `<div class="p-4 bg-white dark:bg-slate-800 rounded-2xl border shadow-sm flex justify-between items-center"><h4 class="font-bold text-sm">${l.title}</h4><button onclick="openInAppViewer('${l.title}', '${l.url}')" class="px-3 py-1.5 bg-brand-500 text-white rounded-xl text-xs font-bold hover:bg-brand-600">قراءة الدرس 📖</button></div>`;
+                    });
+                } else { lessonsList.innerHTML = `<p class="text-xs text-slate-400">لا توجد دروس مضافة.</p>`; }
+
+                if(subData.tests && subData.tests.length > 0) {
+                    subData.tests.forEach(t => {
+                        testsGrid.innerHTML += `<div class="p-3 bg-white dark:bg-slate-800 rounded-2xl border shadow-sm flex justify-between items-center"><h4 class="font-bold text-xs">${t.title}</h4><button onclick="openInAppViewer('${t.title}', '${t.url}')" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700">فتح الفرض 📝</button></div>`;
+                    });
+                } else { testsGrid.innerHTML = `<p class="text-xs text-slate-400">لا توجد فروض.</p>`; }
+
+                if(subData.exams && subData.exams.length > 0) {
+                    subData.exams.forEach(e => {
+                        examsGrid.innerHTML += `<div class="p-3 bg-white dark:bg-slate-800 rounded-2xl border shadow-sm flex justify-between items-center"><h4 class="font-bold text-xs">${e.title}</h4><button onclick="openInAppViewer('${e.title}', '${e.url}')" class="px-3 py-1.5 bg-purple-600 text-white rounded-lg text-xs font-bold hover:bg-purple-700">فتح الاختبار 🎓</button></div>`;
+                    });
+                } else { examsGrid.innerHTML = `<p class="text-xs text-slate-400">لا توجد اختبارات.</p>`; }
+            } else {
+                lessonsList.innerHTML = `<p class="text-xs text-slate-400">قريباً سيتم إضافة محتوى هذا الفصل لهذه المادة.</p>`;
+            }
+        }
+
+        function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); document.getElementById('admin-modal').classList.add('flex'); }
+        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); document.getElementById('admin-modal').classList.remove('flex'); }
+        function resetToExcelData() {
+            localStorage.setItem('louai_excel_st1_data', JSON.stringify(excelSt1Data));
+            academyData = excelSt1Data;
+            alert("تم تحديث البيانات من ملف Excel بنجاح!");
+            if(currentSubject) renderContent(currentTrimester);
+        }
+        function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
+    </script>
+</body>
+</html>
